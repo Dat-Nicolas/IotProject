@@ -1,12 +1,25 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
-
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  root() {
+    return {
+      message: 'Smart AC Control API',
+      version: '1.0.0',
+      endpoints: {
+        health: '/api/health',
+        docs: 'API documentation available',
+      },
+    };
+  }
+
+  @Get('health')
+  health() {
+    return {
+      status: 'ok',
+      service: 'smart-ac-backend',
+      timestamp: new Date().toISOString(),
+    };
   }
 }

@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: iot-smart-ac-api
+    env: node
+    rootDir: backend
+    buildCommand: npm install && npm run prisma:generate && npm run build
+    startCommand: npm run start:prod
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: API_PREFIX
+        value: api
+      - key: JWT_EXPIRES_IN
+        value: "86400"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: iot-smart-ac-db
+          property: connectionString
+      - key: JWT_SECRET
+        sync: false
+      - key: SENSOR_DEVICE_KEY
+        sync: false

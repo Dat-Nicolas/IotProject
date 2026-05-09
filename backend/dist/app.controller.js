@@ -11,14 +11,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppController = void 0;
 const common_1 = require("@nestjs/common");
-const app_service_1 = require("./app.service");
 let AppController = class AppController {
-    appService;
-    constructor(appService) {
-        this.appService = appService;
+    root() {
+        return {
+            message: 'Smart AC Control API',
+            version: '1.0.0',
+            endpoints: {
+                health: '/api/health',
+                docs: 'API documentation available',
+            },
+        };
     }
-    getHello() {
-        return this.appService.getHello();
+    health() {
+        return {
+            status: 'ok',
+            service: 'smart-ac-backend',
+            timestamp: new Date().toISOString(),
+        };
     }
 };
 exports.AppController = AppController;
@@ -26,10 +35,15 @@ __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", String)
-], AppController.prototype, "getHello", null);
+    __metadata("design:returntype", void 0)
+], AppController.prototype, "root", null);
+__decorate([
+    (0, common_1.Get)('health'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], AppController.prototype, "health", null);
 exports.AppController = AppController = __decorate([
-    (0, common_1.Controller)(),
-    __metadata("design:paramtypes", [app_service_1.AppService])
+    (0, common_1.Controller)()
 ], AppController);
 //# sourceMappingURL=app.controller.js.map
