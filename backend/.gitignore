@@ -1,18 +1,26 @@
-node_modules
-.env
+# Dependency directories
+node_modules/
 
-# Logs
-logs
+# Environment variables
+.env
+.env.production
+.env.example
+
+# NestJS build output
+dist/
+/build
+/out
+
+# Prisma
+/prisma/migrations
+# (Nếu bạn muốn giữ schema trên git thì KHÔNG được ignore prisma/schema.prisma)
+
+# Logs - Đã sửa lại để không chặn folder 'src/modules/logs'
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
-
-# Environment variables
-.env
-.env.local
-.env.*.local
 
 # Runtime files
 pids
@@ -21,20 +29,15 @@ pids
 *.pid.lock
 
 # Coverage directory used by testing tools
-coverage
-
-# Build output
-dist
-build
-out
+coverage/
 
 # Temporary files
-tmp
+tmp/
 *.tmp
 
 # IDEs and editors
-.idea
-.vscode
+.idea/
+.vscode/
 *.swp
 *.swo
 *~
@@ -43,15 +46,5 @@ tmp
 .DS_Store
 Thumbs.db
 
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# PyInstaller
-*.manifest
-
-# Optional dependencies
-node_modules/.bin
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
+# TypeScript
+*.tsbuildinfo
