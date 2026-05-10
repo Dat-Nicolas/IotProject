@@ -1,6 +1,6 @@
 import { Injectable, OnModuleInit, OnModuleDestroy, Logger } from '@nestjs/common';
 // Quan trọng: Phải import từ đúng thư mục generated bạn đã cấu hình trong schema
-import { PrismaClient } from '../generated/prisma-client'; 
+import { PrismaClient } from '@prisma/client';
 
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
