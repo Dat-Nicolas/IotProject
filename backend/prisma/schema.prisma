@@ -60,6 +60,8 @@ model Room {
   sensorLogs         SensorLog[]
   activityLogs       ActivityLog[]
   schedules          Schedule[]
+  cameraLogs         CameraLog[]
+  attendanceLogs     AttendanceLog[]
   createdAt          DateTime         @default(now())
   updatedAt          DateTime         @updatedAt
 
@@ -67,26 +69,26 @@ model Room {
 }
 
 model Brand {
-  id          String           @id @default(uuid())
-  name        String           @unique
-  irProtocol  String
-  irConfig    Json
-  createdAt   DateTime         @default(now())
+  id              String           @id @default(uuid())
+  name            String           @unique
+  irProtocol      String
+  irConfig        Json
+  createdAt       DateTime         @default(now())
   airConditioners AirConditioner[]
 }
 
 model AirConditioner {
-  id          String    @id @default(uuid())
+  id          String   @id @default(uuid())
   brandId     String
   roomId      String
-  status      ACStatus  @default(OFF)
-  currentTemp Float     @default(26)
-  mode        ACMode    @default(COOL)
+  status      ACStatus @default(OFF)
+  currentTemp Float    @default(26)
+  mode        ACMode   @default(COOL)
   name        String
-  brand       Brand     @relation(fields: [brandId], references: [id], onDelete: Restrict)
-  room        Room      @relation(fields: [roomId], references: [id], onDelete: Cascade)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  brand       Brand    @relation(fields: [brandId], references: [id], onDelete: Restrict)
+  room        Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   @@index([brandId])
   @@index([roomId])
@@ -144,4 +146,33 @@ model Schedule {
   updatedAt DateTime  @updatedAt
 
   @@index([roomId, dayOfWeek])
+}
+
+model CameraLog {
+  id           String   @id @default(uuid())
+  roomId       String
+  imageUrl     String? // URL ảnh lưu trên server (optional)
+  peopleCount  Int      @default(0)
+  confidence   Float    @default(0)
+  rawResult    Json? // Kết quả raw từ HuggingFace
+  hfModel      String   @default("facebook/detr-resnet-50")
+  processingMs Int? // Thời gian xử lý (ms)
+  status       String   @default("success") // success | error
+  errorMessage String?
+  timestamp    DateTime @default(now())
+  room         Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+
+  @@index([roomId, timestamp])
+}
+
+model AttendanceLog {
+  id        String   @id @default(uuid())
+  roomId    String
+  className String
+  period    Int
+  count     Int
+  imageUrl  String?
+  createdAt DateTime @default(now())
+
+  room Room @relation(fields: [roomId], references: [id])
 }

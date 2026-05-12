@@ -13,6 +13,7 @@ import { LogsModule } from './modules/logs/logs.module';
 import { SchedulesModule } from './modules/schedules/schedules.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { WeatherModule } from './modules/weather/weather.module';
+import { CameraModule } from './modules/camera/camera.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { WeatherModule } from './modules/weather/weather.module';
     SchedulesModule,
     DashboardModule,
     WeatherModule,
+    CameraModule,
   ],
   controllers: [AppController],
 })

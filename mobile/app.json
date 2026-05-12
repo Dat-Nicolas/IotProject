@@ -17,6 +17,12 @@
     "web": {},
     "plugins": [
       "expo-asset"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "c03a4f2b-1367-4836-a336-7ae53057e1d2"
+      }
+    },
+    "owner": "topchit"
   }
 }

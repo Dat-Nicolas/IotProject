@@ -22,6 +22,7 @@ const logs_module_1 = require("./modules/logs/logs.module");
 const schedules_module_1 = require("./modules/schedules/schedules.module");
 const dashboard_module_1 = require("./modules/dashboard/dashboard.module");
 const weather_module_1 = require("./modules/weather/weather.module");
+const camera_module_1 = require("./modules/camera/camera.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -44,6 +45,7 @@ exports.AppModule = AppModule = __decorate([
             schedules_module_1.SchedulesModule,
             dashboard_module_1.DashboardModule,
             weather_module_1.WeatherModule,
+            camera_module_1.CameraModule,
         ],
         controllers: [app_controller_1.AppController],
     })
