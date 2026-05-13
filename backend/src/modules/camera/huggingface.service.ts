@@ -44,7 +44,7 @@ export class HuggingFaceService {
           'Authorization': `Bearer ${this.hfToken}`,
           'Content-Type': 'image/jpeg',
         },
-        body: imageBuffer,
+        body: Buffer.from(imageBuffer),
       });
 
       if (!response.ok) {
